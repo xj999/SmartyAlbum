@@ -1,0 +1,56 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    repositories {
+        jcenter()
+        maven { url "https://github.com/xj999/mvn-repo/tree/master/repository" }
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.0.0-alpha2'
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        /**
+         * 依赖中央库
+         */
+        jcenter()
+        /**
+         * 本地依赖
+         */
+        maven {
+            url "file://F:/github_repo/mvn-repo/repository"
+        }
+        /**
+         * github远程依赖(/raw/必写)
+         */
+        maven {
+            url "https://github.com/xj999/mvn-repo/raw/master/repository"
+        }
+        /**
+         * 依赖到nexus(带帐号密码)
+         */
+        maven {
+            credentials {
+                username 'admin'
+                password 'admin123'
+            }
+            url "http://nexus.epweike.net:8081/nexus/content/repositories/thirdparty/"
+        }
+        maven {
+            credentials {
+                username 'admin'
+                password 'admin123'
+            }
+            url "http://nexus.epweike.net:8081/nexus/content/repositories/epwk/"
+        }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
